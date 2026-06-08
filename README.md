@@ -2,13 +2,19 @@
 
 **First insurance intelligence MCP server for East Africa.**
 
-Exposes Kenya insurance data, NHIF coverage analysis, parametric crop risk scoring, and microinsurance comparison through the Model Context Protocol.
+Exposes Kenya insurance data, NHIF coverage analysis, parametric crop risk scoring,
+and microinsurance comparison through the Model Context Protocol.
 
-## Western Parallel
+## Why Insurance Infrastructure Matters
 
-In the US and UK, insurance APIs and comparison tools (Policygenius, Lemonade API, Root Insurance, The Zebra) have lowered the barrier to insurance access and literacy. bima-mcp brings that intelligence layer to the East African market.
+In mature economies, insurance is invisible infrastructure — it enables risk-taking by
+capping downside. A farmer plants a new crop because crop insurance limits loss.
+A parent starts a business because health insurance protects the family.
+Without this floor, the rational choice is perpetual caution.
 
-**The gap:** Kenya insurance penetration is ~2.3% of GDP vs 8–11% in developed markets (IRA Annual Report 2024). The barrier is access, literacy, and distribution — not demand.
+Kenya's insurance penetration: **2.3% of GDP** vs 8–11% in developed markets.
+The gap is not cultural — it is the cost of distribution, claims verification,
+and actuarial data. All three can be compressed by technology.
 
 ## Tools
 
@@ -16,16 +22,16 @@ In the US and UK, insurance APIs and comparison tools (Policygenius, Lemonade AP
 |------|-------------|
 | `kenya_insurance_products` | List IRA-registered products by type (health, life, crop, device) |
 | `nhif_coverage_query` | Query NHIF benefits by hospital tier and procedure type |
-| `premium_estimate` | Estimate monthly premiums for any coverage type |
-| `parametric_crop_risk` | Calculate NDMA-based crop insurance risk for smallholder farmers |
+| `premium_estimate` | Estimate monthly premiums for any coverage type + income bracket |
+| `parametric_crop_risk` | NDMA-based crop insurance risk for smallholder farmers |
 | `compare_microinsurance` | Compare affordable products by target group and budget |
-| `community_pool_calculator` | Size a chama (savings group) pooled insurance arrangement |
+| `community_pool_calculator` | Size a chama pooled insurance arrangement |
 
 ## Quick Start
 
 ```bash
-pip install bima-mcp
-bima-mcp  # starts the MCP server on stdio
+pip install bima-mcp       # coming soon to PyPI
+bima-mcp                   # starts the MCP server on stdio
 ```
 
 ## Claude Desktop Integration
@@ -44,24 +50,22 @@ bima-mcp  # starts the MCP server on stdio
 
 - **Farmers**: "What crop insurance do I need for my 2-acre maize farm in Nakuru?"
 - **Informal workers**: "What NHIF tier 4 inpatient coverage do I get for KES 500/month?"
-- **Chama treasurers**: "How do I set up pooled hospitalization cover for 25 members at KES 300 each?"
+- **Chama treasurers**: "How do I set up pooled hospitalization cover for 25 members?"
 - **Researchers**: "Compare parametric crop insurance risk across Kenya counties"
 
 ## Research Basis
 
 - ACRE Africa Parametric Crop Insurance Methodology (2023)
 - Kenya IRA Annual Report 2024
-- World Bank Insurance Primer for Low-Income Markets
+- World Bank Insurance Primer for Low-Income Markets (2023)
 - NDMA County Drought Monitoring Reports
-- Pula Advisors Smallholder Insurance Framework
 
-## ⚠️ Important Disclaimers
+## ⚠️ Disclaimers
 
-> DEMO data only — not real insurance products or binding quotes.  
-> Not affiliated with NHIF, IRA, ACRE Africa, Pula Advisors, or Turaco.  
-> Always consult a licensed IRA-registered insurance agent for actual products.  
-> Kenya IRA: ira.go.ke · +254 20 499 0000
+> DEMO data — not real insurance products or binding quotes.
+> Not affiliated with NHIF, IRA, or any insurance provider.
+> Always consult a licensed IRA-registered insurance agent for actual products.
+> Kenya IRA: ira.go.ke
 
 ---
-*© 2026 Gabriel Mahia / AI Kung Fu LLC · MIT License*  
-*Inspired by the insight of Kenbright Insurance CEO on structural support systems for East Africa*
+*© 2026 Gabriel Mahia / AI Kung Fu LLC · MIT License*
