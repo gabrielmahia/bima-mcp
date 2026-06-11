@@ -1,11 +1,21 @@
 {
+  "$schema": "https://glama.ai/mcp/schemas/1.0.0/server.json",
   "name": "bima-mcp",
   "version": "0.1.0",
-  "description": "MCP server for Kenya insurance intelligence — NHIF coverage, parametric crop risk, microinsurance comparison",
+  "description": "MCP server for Kenya insurance intelligence \u2014 NHIF coverage, parametric crop risk, microinsurance comparison",
   "author": "Gabriel Mahia",
   "license": "MIT",
   "homepage": "https://github.com/gabrielmahia/bima-mcp",
-  "tags": ["insurance", "kenya", "africa", "nhif", "parametric", "microinsurance", "bima", "fintech"],
+  "tags": [
+    "insurance",
+    "kenya",
+    "africa",
+    "nhif",
+    "parametric",
+    "microinsurance",
+    "bima",
+    "fintech"
+  ],
   "tools": 6,
   "category": "Finance",
   "transport": "stdio"
