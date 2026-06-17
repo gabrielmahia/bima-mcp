@@ -18,5 +18,15 @@
   ],
   "tools": 6,
   "category": "Finance",
-  "transport": "stdio"
+  "transport": "stdio",
+  "keywords": [
+    "data-sovereignty",
+    "global-south",
+    "digital-rights",
+    "privacy",
+    "open-data",
+    "coordination-infrastructure",
+    "institutional-infrastructure",
+    "africa"
+  ]
 }
