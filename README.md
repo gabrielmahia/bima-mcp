@@ -1,5 +1,8 @@
 # 🛡️ bima-mcp — Kenya Insurance Intelligence MCP Server
 
+[![bima-mcp Glama score](https://glama.ai/mcp/servers/gabrielmahia/bima-mcp/badges/score.svg)](https://glama.ai/mcp/servers/gabrielmahia/bima-mcp)
+
+
 **First insurance intelligence MCP server for East Africa.**
 
 Exposes Kenya insurance data, NHIF coverage analysis, parametric crop risk scoring,
