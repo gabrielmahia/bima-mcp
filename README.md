@@ -4,7 +4,7 @@
 [![smithery badge](https://smithery.ai/badge/@gabrielmahia/bima-mcp)](https://smithery.ai/server/@gabrielmahia/bima-mcp)
 
 
-**First insurance intelligence MCP server for East Africa.**
+Insurance products exist — NHIF, parametric crop cover, microinsurance — but comparing them or checking eligibility requires navigating separate portals with no shared interface.
 
 Exposes Kenya insurance data, NHIF coverage analysis, parametric crop risk scoring,
 and microinsurance comparison through the Model Context Protocol.
