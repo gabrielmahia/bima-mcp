@@ -1,4 +1,5 @@
 # 🛡️ bima-mcp — Kenya Insurance Intelligence MCP Server
+<!-- mcp-name: io.github.gabrielmahia/bima-mcp -->
 
 [![bima-mcp Glama score](https://glama.ai/mcp/servers/gabrielmahia/bima-mcp/badges/score.svg)](https://glama.ai/mcp/servers/gabrielmahia/bima-mcp)
 [![smithery badge](https://smithery.ai/badge/@gabrielmahia/bima-mcp)](https://smithery.ai/server/@gabrielmahia/bima-mcp)
