@@ -25,6 +25,10 @@ dependencies = ["fastmcp>=2.0.0"]
 Homepage = "https://github.com/gabrielmahia/bima-mcp"
 Repository = "https://github.com/gabrielmahia/bima-mcp"
 Issues = "https://github.com/gabrielmahia/bima-mcp/issues"
+Documentation = "https://github.com/gabrielmahia/nairobi-stack"
+"MCP Registry" = "https://registry.modelcontextprotocol.io"
+Datasets = "https://huggingface.co/gmahia"
+Evaluation = "https://github.com/gabrielmahia/kipimo"
 
 [project.scripts]
 bima-mcp = "bima_mcp.main:main"
