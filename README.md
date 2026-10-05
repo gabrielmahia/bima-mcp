@@ -15,7 +15,7 @@ Install: `pip install bima-mcp` · Use with any MCP client.
 
 Insurance products exist — NHIF, parametric crop cover, microinsurance — but comparing them or checking eligibility requires navigating separate portals with no shared interface.
 
-Exposes Kenya insurance data, NHIF coverage analysis, parametric crop risk scoring,
+Exposes Kenya insurance data, NHIF-era coverage figures (NHIF is now SHA/SHIF), parametric crop risk scoring,
 and microinsurance comparison through the Model Context Protocol.
 
 ## Why Insurance Infrastructure Matters

@@ -20,7 +20,7 @@ from fastmcp import FastMCP
 mcp = FastMCP(
     name="bima-mcp",
     instructions="""Kenya insurance intelligence MCP server.
-    Provides tools for exploring insurance products, NHIF coverage, premium estimation,
+    Provides tools for exploring insurance products, NHIF-era coverage figures (NHIF is now SHA/SHIF), premium estimation,
     parametric crop risk, and microinsurance comparison for the East African market.
     
     IMPORTANT: All data is DEMO/synthetic for educational purposes.
@@ -36,14 +36,14 @@ _PRODUCTS = [
         "name": "NHIF Individual Cover", "monthly_premium_kes": 500,
         "coverage": "Inpatient + Outpatient (select facilities)", "regulatory_body": "NHIF Board",
         "mpesa_paybill": "200222", "target": "Employed individuals (PAYE deduction)",
-        "source": "DEMO — Synthetic. Reference: nhif.or.ke",
+        "source": "DEMO — Synthetic NHIF-era figures (NHIF was replaced by SHA/SHIF in Oct 2024). Verify at sha.go.ke",
     },
     {
         "id": "NHIF-002", "type": "health", "provider": "NHIF",
         "name": "NHIF Voluntary Cover", "monthly_premium_kes": 500,
         "coverage": "Inpatient (Level 2–6 hospitals)", "regulatory_body": "NHIF Board",
         "mpesa_paybill": "200222", "target": "Self-employed, informal sector",
-        "source": "DEMO — Synthetic. Reference: nhif.or.ke",
+        "source": "DEMO — Synthetic NHIF-era figures (NHIF was replaced by SHA/SHIF in Oct 2024). Verify at sha.go.ke",
     },
     {
         "id": "MBELE-001", "type": "life", "provider": "Jubilee Life Insurance",
@@ -147,9 +147,9 @@ def kenya_insurance_products(
 
 @mcp.tool(
     description=(
-        "Query NHIF (National Hospital Insurance Fund) coverage details by hospital tier and procedure. "
-        "NHIF is Kenya's state health insurer, analogous to Medicare in the US or NHS in the UK. "
-        "DEMO data — verify at nhif.or.ke."
+        "Query NHIF-era coverage figures by hospital tier and procedure (NHIF was replaced by SHA/SHIF in October 2024; these are historical, synthetic illustrations). "
+        "The state health insurer is now the Social Health Authority (SHA). "
+        "DEMO data — verify current SHA coverage at sha.go.ke."
     ),
     annotations={"readOnlyHint": True},
 )
@@ -187,7 +187,7 @@ def nhif_coverage_query(
             "nhif_covers": f"KES {benefit:,}" if benefit > 0 else "Not covered",
             "out_of_pocket_risk": f"KES {max(0, 15000 - benefit):,}+ at {tier}",
         },
-        "note": "DEMO — Synthetic data. Verify at nhif.or.ke. SHA (Social Health Authority) restructuring underway 2024.",
+        "note": "DEMO — Synthetic NHIF-era data. NHIF was replaced by SHA/SHIF in October 2024. Verify current coverage at sha.go.ke.",
         "source": "bima-mcp synthetic dataset. Reference: NHIF Benefits Schedule 2023.",
     }
 
@@ -399,7 +399,7 @@ def compare_microinsurance(
             "biggest_gap": "Disability/income protection insurance — virtually absent in Kenya microinsurance market",
         },
         "how_to_enroll": {
-            "NHIF": "Walk into any Huduma Centre or go to nhif.or.ke",
+            "NHIF": "NHIF was replaced by SHA in October 2024: register at sha.go.ke or a Huduma Centre",
             "Turaco": "Download Turaco app or enroll via employer",
             "ACRE Africa": "Enroll at planting time through agrivet shops or KALRO extension officers",
             "Payment": "All accept M-PESA payments",
