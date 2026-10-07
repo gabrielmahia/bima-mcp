@@ -1,8 +1,8 @@
 {
   "$schema": "https://glama.ai/mcp/schemas/1.0.0/server.json",
   "name": "bima-mcp",
-  "version": "0.1.0",
-  "description": "MCP server for Kenya insurance intelligence — NHIF-era coverage (now SHA/SHIF; demo data), parametric crop risk, microinsurance comparison",
+  "version": "0.1.4",
+  "description": "MCP server for Kenya insurance intelligence — NHIF-era (now SHA/SHIF) coverage figures, parametric crop risk, microinsurance comparison. Demo data.",
   "author": "Gabriel Mahia",
   "license": "MIT",
   "homepage": "https://github.com/gabrielmahia/bima-mcp",
@@ -16,7 +16,32 @@
     "bima",
     "fintech"
   ],
-  "tools": 6,
+  "tools": [
+    {
+      "name": "kenya_insurance_products",
+      "description": "List Kenya insurance product categories and representative products. Returns DEMO synthetic data for educational/research purposes. Not real insurance products or binding quotes."
+    },
+    {
+      "name": "nhif_coverage_query",
+      "description": "Query NHIF-era coverage figures by hospital tier and procedure (NHIF was replaced by SHA/SHIF in October 2024; these are historical, synthetic illustrations). The state health insurer is now the Social Health Authority (SHA). DEMO data — verify current SHA coverage at sha.go.ke."
+    },
+    {
+      "name": "premium_estimate",
+      "description": "Estimate monthly insurance premium for a Kenya individual. Covers health, life, crop, and device insurance types. Western parallel: Online insurance quote engines (Policygenius, Lemonade). DEMO estimation — not a binding quote."
+    },
+    {
+      "name": "parametric_crop_risk",
+      "description": "Calculate parametric crop insurance risk for a Kenya smallholder farmer. Based on ACRE Africa methodology: NDVI satellite index + NDMA drought history. Western parallel: Root Insurance telematic scoring, Skywatch EasyCrop satellite insurance. DEMO data — actual payouts require enrollment with a licensed insurer."
+    },
+    {
+      "name": "compare_microinsurance",
+      "description": "Compare available microinsurance options for low-income Kenyans. Western parallel: Insurtech comparison platforms (Policygenius, The Zebra, NerdWallet Insurance). East Africa context: 67% of Kenyans cannot afford conventional insurance premiums. DEMO data — verify products at ira.go.ke."
+    },
+    {
+      "name": "community_pool_calculator",
+      "description": "Calculate parameters for a community group (chama) pooled insurance arrangement. Western parallel: Fraternal benefit societies, mutual insurance companies, credit unions with insurance. Kenya parallel: Chama savings groups can formalize as Micro Insurance Groups under IRA. DEMO educational tool — not a licensed insurance product."
+    }
+  ],
   "category": "Finance",
   "transport": "stdio",
   "keywords": [
@@ -32,5 +57,8 @@
     "mcp",
     "useful-rails",
     "ai-agents"
+  ],
+  "maintainers": [
+    "gabrielmahia"
   ]
 }
