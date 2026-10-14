@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # bima-mcp — Kenya Insurance Intelligence MCP Server
 # © 2026 Gabriel Mahia / AI Kung Fu LLC — MIT License
 #
@@ -12,10 +11,13 @@
 # =============================================================================
 
 from __future__ import annotations
-import json
+
 import datetime
+import json
 from typing import Annotated
+
 from fastmcp import FastMCP
+from pydantic import Field
 
 mcp = FastMCP(
     name="bima-mcp",
@@ -115,16 +117,14 @@ _CROP_RISK_MULTIPLIERS = {
 }
 
 def _audit(tool: str, params: dict, result: str):
-    ts = datetime.datetime.utcnow().isoformat()
+    ts = datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None).isoformat()  # same naive UTC string as before; utcnow() is deprecated
     entry = {"ts": ts, "tool": tool, "params": params, "result": result, "source": "bima-mcp"}
     return entry
 
 
 @mcp.tool(
     description=(
-        "List Kenya insurance product categories and representative products. "
-        "Returns DEMO synthetic data for educational/research purposes. "
-        "Not real insurance products or binding quotes."
+        "Browse sample insurance products in Kenya by product type, with provider, cover and indicative price. Use when someone asks what kinds of insurance exist. product_type filters by matching text; no match returns an empty list. Returns status, the products, the count and a note. SYNTHETIC data labelled DEMO: verify at ira.go.ke before advising anyone. Read-only."
     ),
     annotations={"readOnlyHint": True},
 )
@@ -147,9 +147,7 @@ def kenya_insurance_products(
 
 @mcp.tool(
     description=(
-        "Query NHIF-era coverage figures by hospital tier and procedure (NHIF was replaced by SHA/SHIF in October 2024; these are historical, synthetic illustrations). "
-        "The state health insurer is now the Social Health Authority (SHA). "
-        "DEMO data — verify current SHA coverage at sha.go.ke."
+        "DEPRECATED NAME and OUTDATED FIGURES: NHIF was replaced by SHA and SHIF in October 2024. Use when a client still asks about hospital rebates by facility level; it returns illustrative per-day NHIF-era benefit amounts by level (level_2 to level_6) and procedure type, which do NOT describe SHA's current benefit packages. An unrecognised level is treated as level_4 and tier_applied says so. Returns the tier, procedure, the illustrative benefit or 'Not covered at this tier', coverage notes and a source label saying the figures are synthetic and NHIF-era. Check sha.go.ke for real coverage. Read-only."
     ),
     annotations={"readOnlyHint": True},
 )
@@ -168,12 +166,15 @@ def nhif_coverage_query(
     }
     
     tier_data = NHIF_BENEFITS.get(tier.lower(), NHIF_BENEFITS["level_4"])
+    tier_applied = tier.lower() if tier.lower() in NHIF_BENEFITS else "level_4"
     benefit = tier_data.get(procedure_type.lower(), 0)
     
     return {
         "status": "OK",
         "tier": tier,
         "procedure_type": procedure_type,
+        "tier_applied": tier_applied,
+        "deprecated": "NHIF was replaced by SHA and SHIF in October 2024. These are illustrative NHIF-era figures and do not describe current SHA benefit packages.",
         "nhif_benefit_kes_per_day": benefit if benefit > 0 else "Not covered at this tier",
         "coverage_notes": {
             "outpatient": "NHIF outpatient only available at accredited facilities with Super Cover (SHIF 2024)",
@@ -194,10 +195,7 @@ def nhif_coverage_query(
 
 @mcp.tool(
     description=(
-        "Estimate monthly insurance premium for a Kenya individual. "
-        "Covers health, life, crop, and device insurance types. "
-        "Western parallel: Online insurance quote engines (Policygenius, Lemonade). "
-        "DEMO estimation — not a binding quote."
+        "Estimate a monthly and annual insurance premium for a type of cover from age, monthly income, county, acreage and crop, with an affordability ratio against income. Use when someone asks what cover might cost. A simple DEMO formula on SYNTHETIC rates: real premiums come from insurers' quotes. Returns the estimated monthly and annual premium, the affordability ratio and notes. Read-only."
     ),
     annotations={"readOnlyHint": True},
 )
@@ -250,7 +248,7 @@ def premium_estimate(
             f"County drought frequency: {drought_pct}% ({county})",
             f"Crop risk multiplier ({crop}): {crop_mult}x",
             f"Estimated input cost: KES {input_cost_kes:,} for {acreage} acres",
-            f"ACRE Africa: pays via M-PESA when NDVI index drops below trigger",
+            "ACRE Africa: pays via M-PESA when NDVI index drops below trigger",
         ]
     else:  # device
         device_value = max(5000, monthly_income_kes * 2)
@@ -274,10 +272,7 @@ def premium_estimate(
 
 @mcp.tool(
     description=(
-        "Calculate parametric crop insurance risk for a Kenya smallholder farmer. "
-        "Based on ACRE Africa methodology: NDVI satellite index + NDMA drought history. "
-        "Western parallel: Root Insurance telematic scoring, Skywatch EasyCrop satellite insurance. "
-        "DEMO data — actual payouts require enrollment with a licensed insurer."
+        "Estimate drought risk and an illustrative parametric insurance premium and payout for a crop in a county, from a small county drought-frequency table and a crop multiplier. Use when exploring index insurance for farmers. A county or crop not in the table gets a default (30% drought frequency, multiplier 1.0) and county_in_table and crop_in_table say so. The table is hand-written and not verified against NDMA data. Returns a risk score and category, the drought frequency, a premium, a payout trigger and expected payout. DEMO only. Read-only."
     ),
     annotations={"readOnlyHint": True},
 )
@@ -291,6 +286,8 @@ def parametric_crop_risk(
     
     drought = _NDMA_DROUGHT.get(county, {"drought_frequency_pct": 30, "phase": "Minimal", "last_drought": "2020"})
     crop_mult = _CROP_RISK_MULTIPLIERS.get(crop.lower(), 1.0)
+    county_in_table = county in _NDMA_DROUGHT
+    crop_in_table = crop.lower() in _CROP_RISK_MULTIPLIERS
     drought_pct = drought["drought_frequency_pct"]
     
     # Risk score: 0–100
@@ -315,6 +312,8 @@ def parametric_crop_risk(
         "county": county,
         "crop": crop,
         "acreage": acreage,
+        "county_in_table": county_in_table,
+        "crop_in_table": crop_in_table,
         "season": season,
         "risk_score": risk_score,
         "risk_category": risk_category,
@@ -341,10 +340,7 @@ def parametric_crop_risk(
 
 @mcp.tool(
     description=(
-        "Compare available microinsurance options for low-income Kenyans. "
-        "Western parallel: Insurtech comparison platforms (Policygenius, The Zebra, NerdWallet Insurance). "
-        "East Africa context: 67% of Kenyans cannot afford conventional insurance premiums. "
-        "DEMO data — verify products at ira.go.ke."
+        "List sample microinsurance products affordable within a monthly budget for a target group (farmers, boda riders, traders and others). Use when someone asks which cover fits their budget. target_group filters by matching text and max_monthly_budget_kes by price; no match returns an empty list with the priority risks. Returns the target group, budget, the affordable products and priority risks. SYNTHETIC products for illustration: verify at ira.go.ke. Read-only."
     ),
     annotations={"readOnlyHint": True},
 )
@@ -411,10 +407,7 @@ def compare_microinsurance(
 
 @mcp.tool(
     description=(
-        "Calculate parameters for a community group (chama) pooled insurance arrangement. "
-        "Western parallel: Fraternal benefit societies, mutual insurance companies, credit unions with insurance. "
-        "Kenya parallel: Chama savings groups can formalize as Micro Insurance Groups under IRA. "
-        "DEMO educational tool — not a licensed insurance product."
+        "Model a community insurance pool: monthly and annual pool size, and how many claims a coverage goal could support, from group size and monthly contribution. Use when a chama or group wants to self-insure. coverage_goal is only echoed back for context. A simple DEMO calculation with no claims-risk modelling and no regulatory approval: pooling risk is regulated insurance business in Kenya, so speak to the Insurance Regulatory Authority. Returns the pool economics and notes. Read-only."
     ),
     annotations={"readOnlyHint": True},
 )
