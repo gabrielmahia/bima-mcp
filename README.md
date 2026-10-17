@@ -5,12 +5,8 @@
 [![smithery badge](https://smithery.ai/badge/@gabrielmahia/bima-mcp)](https://smithery.ai/server/@gabrielmahia/bima-mcp)
 
 
----
-**Compatible with `claude-sonnet-5`** (released 2026-06-30) — Anthropic's most agentic
-Sonnet yet. Runs multi-step tool chains end-to-end without stopping short.
 Install: `pip install bima-mcp` · Use with any MCP client.
 
----
 
 
 Insurance products exist — NHIF, parametric crop cover, microinsurance — but comparing them or checking eligibility requires navigating separate portals with no shared interface.
@@ -36,7 +32,7 @@ and actuarial data. All three can be compressed by technology.
 | `kenya_insurance_products` | List IRA-registered products by type (health, life, crop, device) |
 | `nhif_coverage_query` | Query NHIF benefits by hospital tier and procedure type |
 | `premium_estimate` | Estimate monthly premiums for any coverage type + income bracket |
-| `parametric_crop_risk` | NDMA-based crop insurance risk for smallholder farmers |
+| `parametric_crop_risk` | Illustrative crop insurance risk from a small hand-written county table (not verified against NDMA data) |
 | `compare_microinsurance` | Compare affordable products by target group and budget |
 | `community_pool_calculator` | Size a chama pooled insurance arrangement |
 
@@ -105,7 +101,7 @@ All servers: [pypi.org/user/gmahia](https://pypi.org/user/gmahia/)
 
 MIT licensed. Feedback via GitHub Issues only — pull requests are not accepted. Demo data is labeled DEMO and is not suitable for operational decisions. Full policy: [docs/architecture/IP_POLICY.md](docs/architecture/IP_POLICY.md). Security reports: see [SECURITY.md](SECURITY.md).
 
-<!-- interconnect:v1 -->
+<!-- interconnect:v2 -->
 ## Part of the East Africa coordination stack
 
 - **Install & run:** `pip install reli-cli && reli list` — the MCP servers on the [official MCP Registry](https://registry.modelcontextprotocol.io) under `io.github.gabrielmahia`
@@ -114,4 +110,4 @@ MIT licensed. Feedback via GitHub Issues only — pull requests are not accepted
 - **Datasets:** [huggingface.co/gmahia](https://huggingface.co/gmahia) · **Docs hub:** [nairobi-stack](https://github.com/gabrielmahia/nairobi-stack)
 
 Model-agnostic by design: closed APIs, open-weight models, and small distilled models are all first-class citizens.
-<!-- /interconnect:v1 -->
+<!-- /interconnect:v2 -->
