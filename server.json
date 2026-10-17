@@ -1,17 +1,17 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
   "name": "io.github.gabrielmahia/bima-mcp",
-  "description": "🛡️ bima-mcp — Kenya Insurance Intelligence MCP Server",
+  "description": "Kenya insurance MCP: sample products, NHIF-era coverage figures, illustrative crop risk. Demo data.",
   "repository": {
     "url": "https://github.com/gabrielmahia/bima-mcp",
     "source": "github"
   },
-  "version": "0.1.6",
+  "version": "0.1.7",
   "packages": [
     {
       "registryType": "pypi",
       "identifier": "bima-mcp",
-      "version": "0.1.6",
+      "version": "0.1.7",
       "transport": {
         "type": "stdio"
       }
