@@ -14,10 +14,18 @@ from __future__ import annotations
 
 import datetime
 import json
+from importlib.metadata import PackageNotFoundError
+from importlib.metadata import version as _pkg_version
 from typing import Annotated
 
 from fastmcp import FastMCP
 from pydantic import Field
+
+try:
+    _VERSION = _pkg_version("bima-mcp")
+except PackageNotFoundError:  # a source tree that was never installed
+    _VERSION = "0+unknown"
+
 
 mcp = FastMCP(
     name="bima-mcp",
@@ -28,7 +36,7 @@ mcp = FastMCP(
     IMPORTANT: All data is DEMO/synthetic for educational purposes.
     Not affiliated with any insurer or the Kenya IRA.
     Always consult a licensed insurance agent for actual products and pricing.
-    """,
+    """, version=_VERSION,
 )
 
 # ── DEMO DATASET: Kenya Insurance Products ─────────────────────────────────────
