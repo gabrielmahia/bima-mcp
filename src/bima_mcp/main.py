@@ -125,7 +125,7 @@ _CROP_RISK_MULTIPLIERS = {
 }
 
 def _audit(tool: str, params: dict, result: str):
-    ts = datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None).isoformat()  # same naive UTC string as before; utcnow() is deprecated
+    ts = datetime.datetime.now(datetime.UTC).replace(tzinfo=None).isoformat()  # same naive UTC string as before; utcnow() is deprecated
     entry = {"ts": ts, "tool": tool, "params": params, "result": result, "source": "bima-mcp"}
     return entry
 
