@@ -2,12 +2,8 @@
 <!-- mcp-name: io.github.gabrielmahia/bima-mcp -->
 
 [![bima-mcp Glama score](https://glama.ai/mcp/servers/gabrielmahia/bima-mcp/badges/score.svg)](https://glama.ai/mcp/servers/gabrielmahia/bima-mcp)
-[![smithery badge](https://smithery.ai/badge/@gabrielmahia/bima-mcp)](https://smithery.ai/server/@gabrielmahia/bima-mcp)
-
 
 Install: `pip install bima-mcp` · Use with any MCP client.
-
-
 
 Insurance products exist — NHIF, parametric crop cover, microinsurance — but comparing them or checking eligibility requires navigating separate portals with no shared interface.
 
