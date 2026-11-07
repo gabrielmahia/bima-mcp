@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "bima-mcp"
+abstract: "MCP server for Kenya insurance intelligence — NHIF-era (now SHA/SHIF) coverage figures, parametric crop risk, microinsurance comparison. Demo data."
+version: "0.1.11"
+authors:
+  - family-names: "Mahia"
+    given-names: "Gabriel"
+repository-code: "https://github.com/gabrielmahia/bima-mcp"
+license: "MIT"
