@@ -3,7 +3,7 @@ message: "If you use this software, please cite it as below."
 type: software
 title: "bima-mcp"
 abstract: "MCP server for Kenya insurance intelligence — NHIF-era (now SHA/SHIF) coverage figures, parametric crop risk, microinsurance comparison. Demo data."
-version: "0.1.11"
+version: "0.1.12"
 authors:
   - family-names: "Mahia"
     given-names: "Gabriel"
